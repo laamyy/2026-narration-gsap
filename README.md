@@ -1,2 +1,6 @@
 # 2026-narration-gsap
-projet de page narrative utilisant GSAP.
+
+##Descritpion
+
+projet de page narrative utilisant GSAP. 
+Ce projet est realisé par des écoliers
