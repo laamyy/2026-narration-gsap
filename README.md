@@ -1,6 +1,6 @@
 # 2026-narration-gsap
 
-##Descritpion
+## Descritpion
 
 projet de page narrative utilisant GSAP. 
 Ce projet est realisé par des écoliers
