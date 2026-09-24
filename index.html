@@ -1,28 +1,311 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projet GSAP</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Guide DBD — Guide interactif pour Dead by Daylight. Apprenez les rôles, les mécaniques de jeu et les meilleurs builds.">
+  <title>Guide DBD — Le Guide Complet Dead by Daylight</title>
+
+  <!-- Polices Google Fonts (simples et lisibles) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Feuille de style CSS -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
- 
-    
-<!-----SCRIPT---------------------------------->
 
+  <!-- ==========================================
+       EN-TÊTE DU SITE (NAVIGATION)
+       ========================================== -->
+  <header class="header">
+    <div class="header-container">
+      <a href="#hero" class="logo">
+        <span class="logo-badge">DBD</span>
+        <span class="logo-text">Guide DBD</span>
+      </a>
 
-<!----GSAP--------------->
-<script src=JS/gsap.min.js></script>
-<script src=JS/ScrollTrigger.min.js></script>  
-<script src=JS/ScrollToPlugin.min.js></script>
-<script src=JS/Draggable.min.js></script>
-<script src=JSGSAP/MotionPathPlugin.min.js></script>
+      <!-- Menu de navigation vers les sections de la page -->
+      <nav class="nav-menu">
+        <a href="#hero" class="nav-link">Accueil</a>
+        <a href="#roles" class="nav-link">Rôles</a>
+        <a href="#traque" class="nav-link">La Traque</a>
+        <a href="#inventaire" class="nav-link">Inventaire</a>
+        <a href="#builds" class="nav-link">Builds</a>
+      </nav>
+    </div>
+  </header>
 
+  <main>
+    <!-- ==========================================
+         SECTION 1 : ACCUEIL / HERO (Animation classique)
+         ========================================== -->
+    <section class="section hero-section" id="hero">
+      <!-- Vidéo d'ambiance en arrière-plan -->
+      <video class="hero-video" autoplay muted loop playsinline>
+        <source src="assets/video/DeadbyDaylight-Trailer.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay"></div>
 
-<!----MAIN--------------->
-<script src=JS/main.js></script>
+      <div class="hero-content">
+        <span class="tag">GUIDE COMMUNAUTAIRE</span>
+        <h1 class="hero-title">MAÎTRISEZ<br><span class="highlight-red">LE BROUILLARD.</span></h1>
+        <p class="hero-description">
+          Bienvenue sur le <strong>Guide DBD</strong>. Que vous soyez Survivant tentant d'échapper à la mort ou Tueur traquant vos proies, découvrez toutes les bases pour triompher dans l'arène.
+        </p>
+        <div class="hero-buttons">
+          <a href="#roles" class="btn btn-primary">Découvrir les rôles</a>
+          <a href="#traque" class="btn btn-secondary">Voir la traque au scroll</a>
+        </div>
+      </div>
+    </section>
 
+    <!-- ==========================================
+         SECTION 2 : LES RÔLES (Interaction au clic GSAP)
+         ========================================== -->
+    <section class="section roles-section" id="roles">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">01 / DUALITÉ</span>
+          <h2 class="section-title">CHOISISSEZ VOTRE CAMP</h2>
+          <p class="section-subtitle">Cliquez sur un camp pour voir sa stratégie et ses conseils clés.</p>
+        </div>
 
+        <!-- Boutons d'interaction au clic -->
+        <div class="role-selector-buttons">
+          <button type="button" class="btn-role active" id="btn-survivor">
+            <span class="role-indicator role-survivor"></span> Survivant
+          </button>
+          <button type="button" class="btn-role" id="btn-killer">
+            <span class="role-indicator role-killer"></span> Tueur
+          </button>
+        </div>
 
+        <!-- Carte de présentation du rôle sélectionné -->
+        <div class="role-display-card" id="role-display-card">
+          <div class="role-card-text">
+            <span class="role-badge" id="role-badge">ÉQUIPE DE 4 JOUEURS</span>
+            <h3 class="role-title" id="role-title">Le Survivant : Coopérer pour Fuir</h3>
+            <p class="role-desc" id="role-desc">
+              Votre but est de réparer 5 générateurs avec vos 3 coéquipiers, d'alimenter les portes de sortie et de vous échapper vivants sans vous faire capturer par le Tueur.
+            </p>
+            <ul class="role-tips" id="role-tips">
+              <li><strong>Priorité :</strong> Réparez les générateurs en restant vigilant aux bruits de battements de cœur.</li>
+              <li><strong>Entraide :</strong> Soignez vos coéquipiers blessés et décrochez-les rapidement.</li>
+              <li><strong>Esquive :</strong> Utilisez les palettes et les fenêtres pour faire perdre du temps au Tueur.</li>
+            </ul>
+          </div>
+          <div class="role-card-image-box">
+            <img src="assets/img/survivant.jpg" alt="Survivant Dead by Daylight" id="role-image" class="role-image">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 3 : LA TRAQUE (Déplacement narratif au Scroll GSAP)
+         ========================================== -->
+    <section class="section scroll-section" id="traque">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">02 / NARRATION AU SCROLL</span>
+          <h2 class="section-title">LA COURSE CONTRE LA MORT</h2>
+          <p class="section-subtitle">Scrollez vers le bas pour faire progresser la traque et réparer le générateur.</p>
+        </div>
+
+        <!-- Piste visuelle où les personnages bougent au scroll -->
+        <div class="chase-track-container" id="chase-container">
+          <div class="track-header">
+            <span>Point de départ</span>
+            <span class="track-goal">Porte de Sortie</span>
+          </div>
+
+          <div class="chase-track">
+            <!-- Élément déplacé au scroll : Le Survivant -->
+            <div class="runner runner-survivor" id="runner-survivor">
+              <div class="runner-token">S</div>
+              <span class="runner-name">Survivant</span>
+            </div>
+
+            <!-- Élément déplacé au scroll : Le Tueur à ses trousses -->
+            <div class="runner runner-killer" id="runner-killer">
+              <div class="runner-token">T</div>
+              <span class="runner-name">Tueur</span>
+            </div>
+
+            <div class="exit-gate">
+              <span>SORTIE</span>
+            </div>
+          </div>
+
+          <!-- Jauge de progression du générateur liée au scroll -->
+          <div class="generator-box">
+            <div class="generator-info">
+              <span>Progression de la Réparation :</span>
+              <strong id="gen-percent-text">0%</strong>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="generator-fill"></div>
+            </div>
+          </div>
+
+          <!-- 3 Étapes narratives -->
+          <div class="narrative-steps">
+            <div class="step-card" id="step-1">
+              <span class="step-number">Étape 1</span>
+              <h4>Repérer le Générateur</h4>
+              <p>Évitez les corbeaux et travaillez discrètement.</p>
+            </div>
+            <div class="step-card" id="step-2">
+              <span class="step-number">Étape 2</span>
+              <h4>Tenir la Poursuite</h4>
+              <p>Le Tueur approche : gagnez de précieuses secondes.</p>
+            </div>
+            <div class="step-card" id="step-3">
+              <span class="step-number">Étape 3</span>
+              <h4>Ouvrir les Portes</h4>
+              <p>Activez le levier final et franchissez la ligne d'échappée.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 4 : L'INVENTAIRE (Glissé - Déposé / GSAP Draggable)
+         ========================================== -->
+    <section class="section inventory-section" id="inventaire">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">03 / GLISSÉ - DÉPOSÉ (DRAGGABLE)</span>
+          <h2 class="section-title">L'INVENTAIRE DE SURVIE</h2>
+          <p class="section-subtitle">
+            Attrapez un objet avec votre souris (ou au doigt sur mobile) et glissez-le dans votre sacoche de survie.
+          </p>
+        </div>
+
+        <div class="inventory-play-area" id="inventory-area">
+          <!-- Zone de départ avec les objets à glisser -->
+          <div class="inventory-items-container">
+            <p class="box-label">Objets disponibles (glissez-les) :</p>
+            
+            <div class="draggable-items-row">
+              <div class="drag-item item-toolbox" id="drag-toolbox">
+                <img src="assets/img/IconItems_wornOutTools.webp" alt="Boîte à Outils" class="item-img">
+                <span class="item-title">Boîte à Outils</span>
+                <small class="item-desc">Répare 30% plus vite</small>
+              </div>
+
+              <div class="drag-item item-medkit" id="drag-medkit">
+                <img src="assets/img/IconItems_emergencyMedKit.webp" alt="Trousse de Soin" class="item-img">
+                <span class="item-title">Trousse de Soin</span>
+                <small class="item-desc">Auto-soin d'urgence</small>
+              </div>
+
+              <div class="drag-item item-flashlight" id="drag-flashlight">
+                <img src="assets/img/IconItems_flashlight.webp" alt="Lampe Torche" class="item-img">
+                <span class="item-title">Lampe Torche</span>
+                <small class="item-desc">Aveugle le tueur</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Zone cible : La sacoche du survivant -->
+          <div class="drop-target-box" id="backpack-target">
+            <div class="target-slot-icon">SLOT ACTIF</div>
+            <h3>Sacoche d'équipement</h3>
+            <p class="target-instruction">Déposez votre objet favori ici pour la partie.</p>
+            <button type="button" class="btn btn-secondary btn-reset" id="btn-reset-drag">
+              Réinitialiser l'emplacement
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 5 : LES BUILDS RECOMMANDÉS (Apparition GSAP)
+         ========================================== -->
+    <section class="section builds-section" id="builds">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">04 / STRATÉGIE</span>
+          <h2 class="section-title">LES MEILLEURS BUILDS</h2>
+          <p class="section-subtitle">Une sélection de compétences éprouvées pour débuter et progresser.</p>
+        </div>
+
+        <div class="builds-grid">
+          <!-- Carte 1 -->
+          <article class="build-card">
+            <div class="build-type-tag tag-survivor">SURVIVANT / OBJECTIF</div>
+            <h3 class="build-name">Gen-Rush Rapide</h3>
+            <p class="build-intro">Fait pour réparer les générateurs le plus vite possible sans perdre de temps.</p>
+            <div class="perks-list">
+              <div class="perk-badge"><span>DV</span> Déjà Vu</div>
+              <div class="perk-badge"><span>PT</span> Prouve-toi</div>
+              <div class="perk-badge"><span>RS</span> Résilience</div>
+              <div class="perk-badge"><span>LI</span> Lien</div>
+            </div>
+          </article>
+
+          <!-- Carte 2 -->
+          <article class="build-card">
+            <div class="build-type-tag tag-survivor">SURVIVANT / POURSUITE</div>
+            <h3 class="build-name">Esquive & Boucle</h3>
+            <p class="build-intro">Permet d'enchaîner les palettes et fenêtres pour faire perdre du temps au tueur.</p>
+            <div class="perks-list">
+              <div class="perk-badge"><span>SP</span> Souplesse</div>
+              <div class="perk-badge"><span>FO</span> Fenêtres d'Opportunité</div>
+              <div class="perk-badge"><span>FN</span> Finesse</div>
+              <div class="perk-badge"><span>CD</span> Coup Décisif</div>
+            </div>
+          </article>
+
+          <!-- Carte 3 -->
+          <article class="build-card">
+            <div class="build-type-tag tag-killer">TUEUR / CONTRÔLE</div>
+            <h3 class="build-name">Pression Ultime</h3>
+            <p class="build-intro">Ralentit la progression des survivants et donne des informations sur leurs positions.</p>
+            <div class="perks-list">
+              <div class="perk-badge"><span>BC</span> Barbecue & Chili</div>
+              <div class="perk-badge"><span>RD</span> Résonance de Douleur</div>
+              <div class="perk-badge"><span>DM</span> Dead Man's Switch</div>
+              <div class="perk-badge"><span>NT</span> Nul n'Échappe à la Mort</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================
+       PIED DE PAGE (FOOTER)
+       ========================================== -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <span class="logo-badge">DBD</span>
+        <strong>Guide DBD</strong>
+      </div>
+      <p class="footer-text">
+        Projet d'apprentissage — Site onepage narratif avec GSAP, HTML5 et CSS3.<br>
+        Dead by Daylight est une marque déposée de Behaviour Interactive.
+      </p>
+      <a href="#hero" class="back-to-top">Haut de page</a>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       SCRIPTS JAVASCRIPT : GSAP + NOTRE CODE
+       ========================================== -->
+  <!-- 1. Bibliothèque principale GSAP -->
+  <script src="JS/GSAP/gsap.min.js"></script>
+  <!-- 2. Plugin ScrollTrigger pour le scroll narratif -->
+  <script src="JS/GSAP/ScrollTrigger.min.js"></script>
+  <!-- 3. Plugin Draggable pour le glissé-déposé -->
+  <script src="JS/GSAP/Draggable.min.js"></script>
+  <!-- 4. Notre script d'animations, simple et commenté -->
+  <script src="app.js"></script>
 </body>
 </html>
